@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 图标组件库 -->
+    <link href='./css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Arknights Priestess</title>
+    <!--额外样式表-->
+    <style>
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+<script src="js/jquery-3.7.1.min.js"></script>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="img/logo.jpg" alt="">
+                </span>
+                <div class="text logo-text">
+                    <span class="name">Arknights</span>
+                    <span class="name">Priestess</span>
+                </div>
+            </div>
+
+            <i class="bx bx-chevron-right toggle"></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#prts_home" onclick="navigate('prts_home')">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">主页</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#prts_two" onclick="navigate('prts_two')">
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">战斗设置</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">通知</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon'></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-heart icon'></i>
+                            <span class="text nav-text">Likes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon'></i>
+                            <span class="text nav-text">设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="text nav-text">退出</span>
+                        </a>
+                    </li>
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class="bx bx-moon icon moon"></i>
+                            <i class="bx bx-sun icon sun"></i>
+                        </div>
+                        <span class="mode-text text">夜</span>
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="home">
+        <div id="page_top" class="text">Arknights Priestess</div>
+
+        <!--主页-->
+        <div id="prts_home" class="page active">
+            <div class="task_and_screenshot">
+                <!--当前任务-->
+                <div id="current_task_box" class="current_task_box">
+                    <h1>任务调度</h1>
+                </div>
+                <div id="screenshot" class="screenshot">
+<!--                    <img src="http://127.0.0.1:14513/api/screenshot" alt="EYESOFPRIESTESS">-->
+                </div>
+            </div>
+            <!--日志设置框-->
+            <div id="log_setting_box" class="log_setting_box">
+                <h1>日志</h1>
+                <button class="log_setting_button" onclick=requests("http://127.0.0.1:14513/api/clear_log")>清除日志</button>
+                <button class="log_setting_button_2">自动滚动: 开</button>
+            </div>
+            <!--日志框-->
+            <div id="log_data_container" class="log_content_box log_text">
+                <p>当前无日志</p>
+            </div>
+        </div>
+
+        <!--第二页-->
+        <div id="prts_two" class="page">
+            <p>这是第二页</p>
+        </div>
+    </section>
+
+    <script src="./js/script.js"></script>
+
+<!--ajax加载日志相关-->
+<script>
+    let isAjaxEnabled = true;
+    $(document).ready(function() {
+        let previousData = '';
+        // 定义一个函数，用于请求数据
+        function fetchData() {
+            $.ajax({
+                url: 'http://127.0.0.1:14513/api/console_log', // API
+                method: 'GET',
+                success: function(data) {
+                    // 更新页面内容
+                    $('#log_data_container').html(data);
+                    if (data !== previousData) {
+                        const scrollDiv = document.getElementById('log_data_container');
+                        if (isAjaxEnabled) {
+                            scrollDiv.lastElementChild.scrollIntoView();
+                        }
+                        previousData = data;
+                    }
+                },
+                error: function(error) {
+                    console.error('请求数据失败', error);
+                }
+            });
+        }
+
+        function fetchImage() {
+            const timestamp = new Date().getTime();
+            const apiUrl = "http://127.0.0.1:14513/api/eyes-of-priestess" + "?timestamp=" + timestamp;
+
+            // 创建一个新的图片对象
+            const img = new Image();
+            img.src = apiUrl; // 设置图片 URL
+
+            img.onload = function() {
+                // 图片加载完成后，设置为背景图
+                document.getElementById("screenshot").style.backgroundImage = `url('${img.src}')`;
+            };
+
+            img.onerror = function() {
+                console.error('获取图片失败');
+            };
+        }
+
+        // 每1秒请求一次数据
+        setInterval(fetchData, 1000);
+        setInterval(fetchImage, 2000)
+        // 初始请求数据
+        fetchData();
+        fetchImage();
+    });
+</script>
+<!--单页应用相关-->
+<script>
+    function navigate(pageId) {
+        // 隐藏所有页面
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+
+        // 显示特定页面
+        document.getElementById(pageId).classList.add('active');
+    }
+</script>
+<script>
+    function requests(url) {
+        fetch(url) // API 端点
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络响应不是 OK');
+                }
+                return response.json(); // 解析 JSON 数据
+            })
+            .then(data => {
+                console.log(data); // 处理返回的数据
+            })
+            .catch(error => {
+                console.error('请求失败:', error);
+            });
+    }
+</script>
+<script>
+    window.onload = function() {
+        const height = window.innerHeight - 60 - 250 - 62 - 60;
+        document.getElementById("current_task_box").style.height = height.toString() + "px"
+    }
+</script>
+<script>
+
+</script>
+</body>
+</html>
