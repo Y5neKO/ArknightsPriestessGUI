@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ArknightsPriestessGUI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ArknightsPriestessGUI_jar</output-path>
+    <root id="archive" name="ArknightsPriestessGUI.jar">
+      <element id="module-output" name="ArknightsPriestessGUI" />
+    </root>
+  </artifact>
+</component>

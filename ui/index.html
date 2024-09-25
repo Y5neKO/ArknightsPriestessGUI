@@ -190,6 +190,8 @@
         // 初始请求数据
         fetchData();
         fetchImage();
+        const height = window.innerHeight - 60 - 250 - 62 - 60;
+        document.getElementById("current_task_box").style.height = height.toString() + "px"
     });
 </script>
 <!--单页应用相关-->

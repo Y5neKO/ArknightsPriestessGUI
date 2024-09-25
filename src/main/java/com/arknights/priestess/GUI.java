@@ -29,8 +29,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class UI extends Application {
-    public static Image icon = new Image("img/icon.jpg");
+public class GUI extends Application {
+    public static Image icon = new Image("img/logo.png");
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -190,7 +190,7 @@ public class UI extends Application {
         popup.add(exitItem);
 
         // 创建TrayIcon并添加事件监听器
-        TrayIcon trayIcon = new TrayIcon(bufferedImage, "RadiantKnightExploit", popup);
+        TrayIcon trayIcon = new TrayIcon(bufferedImage, "Arknights Priestess", popup);
         trayIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
