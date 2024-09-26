@@ -113,7 +113,7 @@
             <div class="task_and_screenshot">
                 <!--当前任务-->
                 <div id="current_task_box" class="current_task_box">
-                    <h1>任务调度</h1>
+                    <h1>任务调度</h1><button class="log_setting_button" onclick=requests("http://127.0.0.1:14513/api/main_console")>主控制台测试</button>
                 </div>
                 <div id="screenshot" class="screenshot">
 <!--                    <img src="http://127.0.0.1:14513/api/screenshot" alt="EYESOFPRIESTESS">-->
@@ -184,9 +184,22 @@
             };
         }
 
+        function heartbeat() {
+            fetch('http://127.0.0.1:14513/heartbeat')
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Heartbeat failed');
+                    } else {
+                        console.log('Heartbeat sent successfully');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
         // 每1秒请求一次数据
         setInterval(fetchData, 1000);
         setInterval(fetchImage, 2000)
+        setInterval(heartbeat, 5000)
         // 初始请求数据
         fetchData();
         fetchImage();
