@@ -39,4 +39,7 @@ build/
 
 /out/
 /target/
-.idea
+.idea/
+.claude/
+.spec-workflow/
+CLAUDE.md

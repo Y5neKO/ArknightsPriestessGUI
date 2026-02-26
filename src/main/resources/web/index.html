@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arknights Priestess</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/boxicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="img/logo.jpg" alt="Logo">
+                </span>
+                <div class="text logo-text">
+                    <span class="name">Arknights</span>
+                    <span class="name">Priestess</span>
+                </div>
+            </div>
+            <i class="bx bx-chevron-right toggle"></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#prts_home" data-page="prts_home">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">主页</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#prts_two" data-page="prts_two">
+                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                            <span class="text nav-text">战斗设置</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#" data-page="notifications">
+                            <i class="bx bx-bell icon"></i>
+                            <span class="text nav-text">通知</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#" data-page="experimental">
+                            <i class="bx bx-vial icon"></i>
+                            <span class="text nav-text">实验功能</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#prts_setting" data-page="prts_setting">
+                            <i class="bx bx-server icon"></i>
+                            <span class="text nav-text">设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <ul>
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class="bx bx-moon icon moon"></i>
+                            <i class="bx bx-sun icon sun"></i>
+                        </div>
+                        <span class="mode-text text">夜</span>
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <section class="home">
+        <div id="page_top" class="text">PRTS终端系统</div>
+
+        <!-- Home Page -->
+        <div id="prts_home" class="page active">
+            <!-- Task and Screenshot Row -->
+            <div class="task-and-screenshot">
+                <div id="current_task_box" class="current-task-box">
+                    <h1>任务调度</h1>
+                    <button class="log-setting-button" id="btn-test-console">主控制台测试</button>
+                </div>
+                <div id="screenshot" class="screenshot"></div>
+            </div>
+
+            <!-- Log Settings -->
+            <div id="log_setting_box" class="log-setting-box">
+                <h1>日志</h1>
+                <button class="log-setting-button" id="btn-clear-log">清除日志</button>
+                <button class="log-setting-button-2" id="btn-auto-scroll">自动滚动: 开</button>
+            </div>
+
+            <!-- Log Content -->
+            <div id="log_data_container" class="log-content-box">
+                <p>当前无日志</p>
+            </div>
+        </div>
+
+        <!-- Battle Settings Page -->
+        <div id="prts_two" class="page">
+            <div class="setting-box">
+                <div class="setting-in-box">
+                    <h1 class="setting-title">战斗设置</h1>
+                    <div class="center">
+                        <p class="setting-item">战斗设置页面开发中...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <form method="post" id="settingForm">
+            <div id="prts_setting" class="page">
+                <div class="setting-box">
+                    <div id="setting_in_box" class="setting-in-box">
+                        <h1 class="setting-title">设置</h1>
+                        <div class="center">
+                            <h4 class="setting-title">模拟器设置</h4>
+                            <hr>
+                            <label for="emu_setting" class="setting-item">模拟器设置: </label>
+                            <select id="emu_setting" class="setting-item bx-selection">
+                                <option value="auto">自动选择</option>
+                                <option value="mumu">MuMu模拟器</option>
+                                <option value="bluestacks">BlueStacks</option>
+                            </select>
+                            <hr>
+                            <input type="submit" value="保存设置" class="setting-save-button">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- Scripts (loaded at the end for better performance) -->
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/poller.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
